@@ -1,2 +1,2 @@
 # Sprint1-Project
-ICS proejct
+ICS project
