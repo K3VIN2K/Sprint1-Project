@@ -1,0 +1,8 @@
+Questions.txt:
+category,difficulty,question,answer code
+
+Answers.txt:
+answer code:answer
+
+multiple answers should be separated with a comma ","
+answer code must be a unique integer
