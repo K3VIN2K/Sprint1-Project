@@ -9,10 +9,14 @@ import java.util.Scanner;
 public class Questions {
 	private String c;
 	private String d;
+	private int num;
+	private int count;
 	private ArrayList<String> questions = new ArrayList<>();
-	Questions(String category, String difficulty){
+	Questions(String category, String difficulty, int numQ){
 		c = category;
 		d = difficulty;
+		num = numQ;
+		count = 0;
 	}
 	Questions(){
 		
@@ -31,17 +35,22 @@ public class Questions {
 			fRead.close();
 		}
 		catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 	}
 	
-	public String getQuestion() {
-		return randomNum();
-	}
-	
-	private String randomNum() {
+	private String getQuestion() {
 		Random rand = new Random();
 		int index;
 		index = rand.nextInt(questions.size());
+		count ++;
 		return questions.get(index);
+	}
+	public String getNext() {
+		if (count < num) {
+			return getQuestion();
+		} else {
+			return "";
+		}
 	}
 }
