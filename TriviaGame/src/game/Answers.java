@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Answers{
 	private int code;
+	private int totalAnswers;
+	private int totalRight;
 	
 	Answers(){
 		code = 0;
@@ -26,16 +28,25 @@ public class Answers{
 			return answer;
 	}
 	
-	public boolean Check(String a) throws Exception{
+	public double Check(String a) throws Exception{
 		String[] answer = Load().split(",");
 		String[] player = a.split(",");
-		System.out.println(Arrays.toString(answer));
-		System.out.println(Arrays.toString(player));
-		if (Arrays.equals(answer, player)) {
-			return true;
-		} else {
-			return false;
+		int numA = answer.length;
+		int numRight = 0;
+		totalAnswers += numA;
+		ArrayList<String> answers = new ArrayList<>();
+		for (int i = 0; i < answer.length; i++) {
+			answers.add(answer[i]);
 		}
+		System.out.println(answers.toString());
+		for (int i = 0; i < answers.size(); i++) {
+			if (answers.contains(player[i])) {
+				answers.remove(player[i]);
+				numRight ++;
+				totalRight ++;
+			}
+		}
+		return (double) numRight/ (double) numA;
 	}
 	public void SetCode(String q){
 		code = Integer.valueOf(q.split(",")[1]);

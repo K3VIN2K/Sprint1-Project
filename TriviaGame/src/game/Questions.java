@@ -12,11 +12,13 @@ public class Questions {
 	private int num;
 	private int count;
 	private ArrayList<String> questions = new ArrayList<>();
+	private boolean playing;
 	Questions(String category, String difficulty, int numQ){
 		c = category;
 		d = difficulty;
 		num = numQ;
 		count = 0;
+		playing = true;
 	}
 	Questions(){
 		
@@ -48,9 +50,14 @@ public class Questions {
 	}
 	public String getNext() {
 		if (count < num) {
+			playing = true;
 			return getQuestion();
 		} else {
-			return "";
+			playing = false;
+			return "Finished";
 		}
+	}
+	public boolean gameOn() {
+		return playing;
 	}
 }

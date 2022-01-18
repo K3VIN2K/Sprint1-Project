@@ -1,10 +1,12 @@
 package game;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -12,17 +14,21 @@ public class GUIDriver extends Application {
 
 	@Override
 	public void start(Stage Stage) throws Exception {
+		BorderPane bp = new BorderPane();
 		VBox Screen = new VBox(20);
 		TextField answerBox = new TextField();
 		Label questionBox = new Label();
 		Button check = new Button("Check");
+		answerBox.setMaxWidth(200);
 		Screen.getChildren().addAll(questionBox, answerBox, check);
+		bp.setCenter(Screen);
+		Screen.setAlignment(Pos.CENTER);
 		
 		Questions question = new Questions("test", "easy", 3);
 		Answers answer = new Answers();
 		question.Load();
 		
-		Scene scene = new Scene(Screen,400,400);
+		Scene scene = new Scene(bp,400,400);
 		Stage.setScene(scene);
 		Stage.show();
 		
@@ -33,18 +39,17 @@ public class GUIDriver extends Application {
 		check.setOnAction(e ->{
 			try {
 				String currentQ = new String();
-				check.disarm();
-				if (answer.Check(answerBox.getText())) {
-					System.out.println("Correct");
-				} else {
-					System.out.println("inCorrect");
+				check.setDisable(true);
+				System.out.println(answer.Check(answerBox.getText()));
+				if (question.gameOn()) {
+					currentQ = question.getNext();
+					questionBox.setText(currentQ.split(",")[0]);
+					answer.SetCode(currentQ);
+					check.setDisable(false);
 				}
-				currentQ = question.getNext();
-				questionBox.setText(currentQ.split(",")[0]);
-				answer.SetCode(currentQ);
-				check.arm();
+				answerBox.setText("");
 			} catch (Exception v) {
-				
+				System.out.println(v.getMessage());
 			}
 		});
 		
