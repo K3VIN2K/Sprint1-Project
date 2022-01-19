@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -11,9 +12,34 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class GUIDriver extends Application {
+	
+	private String category = new String();
+	private String difficulty = new String();
 
 	@Override
 	public void start(Stage Stage) throws Exception {
+		ChoiceDialog getCategory = new ChoiceDialog("cat1","test","test","test","cat4","cat5");
+		ChoiceDialog getDifficulty = new ChoiceDialog("easy","easy","normal","hard");
+		System.out.println(getDifficulty.getModality());
+		getDifficulty.setOnCloseRequest(e->{
+			difficulty = getDifficulty.getSelectedItem().toString();
+			System.out.println(difficulty);
+		});
+		getCategory.setOnCloseRequest(e -> {
+			category = getCategory.getSelectedItem().toString();
+			System.out.println(category);
+			getDifficulty.showAndWait();
+		});
+		getCategory.showAndWait();
+		Stage.setScene(GameScreen());
+		Stage.show();
+	}
+
+	public static void main(String[] args) {
+		launch(args);
+	}
+	
+	public Scene GameScreen() {
 		BorderPane bp = new BorderPane();
 		VBox Screen = new VBox(20);
 		TextField answerBox = new TextField();
@@ -24,14 +50,11 @@ public class GUIDriver extends Application {
 		bp.setCenter(Screen);
 		Screen.setAlignment(Pos.CENTER);
 		
-		Questions question = new Questions("test", "easy", 3);
+		Questions question = new Questions(category, difficulty, 3);
 		Answers answer = new Answers();
 		question.Load();
 		
 		Scene scene = new Scene(bp,400,400);
-		Stage.setScene(scene);
-		Stage.show();
-		
 		String Question = question.getNext();
 		answer.SetCode(Question);
 		questionBox.setText(Question.split(",")[0]);
@@ -52,31 +75,20 @@ public class GUIDriver extends Application {
 				System.out.println(v.getMessage());
 			}
 		});
-		
+		return scene;
 	}
-
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
+	/*public void startScreen() {
+		ChoiceDialog getCategory = new ChoiceDialog("cat1","cat1","cat2","cat3","cat4","cat5");
+		ChoiceDialog getDifficulty = new ChoiceDialog("easy","easy","normal","hard");
+		getCategory.show();
+		getCategory.setOnCloseRequest(e -> {
+			category = getCategory.getSelectedItem().toString();
+			getDifficulty.show();
+		});
+		getDifficulty.setOnCloseRequest(e->{
+			difficulty = getDifficulty.getSelectedItem().toString();
+		});
+	}*/
 
 }
-/*
-  Scanner in = new Scanner(System.in);
-		Questions question = new Questions("test", "easy");
-		Answers answer = new Answers();
-		question.Load();
-		System.out.println("How many questions?");
-		int numQuestions = in.nextInt();
-		for (int i = 0; i < numQuestions; i++) {
-			String Question = question.getQuestion();
-			answer.SetCode(Question);
-			System.out.println(Question.split(",")[0]);
-			String input = in.nextLine();
-			if (answer.Check(input)) {
-				System.out.println("Correct");
-			} else {
-				System.out.println("inCorrect");
-			}
-		}
-	}
-	*/
