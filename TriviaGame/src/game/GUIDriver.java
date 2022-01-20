@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
 import javafx.stage.Stage;
 
 public class GUIDriver extends Application {
@@ -55,6 +56,9 @@ public class GUIDriver extends Application {
 		Label score = new Label();
 		Button check = new Button("Check");
 		Button end = new Button("End Game");
+		
+		Media test = new Media("");
+		
 		buttons.getChildren().addAll(check, end);
 		buttons.setAlignment(Pos.CENTER);
 		answerBox.setMaxWidth(200);
