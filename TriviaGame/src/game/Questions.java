@@ -13,27 +13,47 @@ public class Questions {
 	private int count;
 	private ArrayList<String> questions = new ArrayList<>();
 	private boolean playing;
-	Questions(String category, String difficulty, int numQ){
+	Questions(String category, String difficulty){
 		c = category;
 		d = difficulty;
-		num = numQ;
 		count = 0;
 		playing = true;
+		num = 0;
+		Load();
 	}
-	Questions(){
-		
+	public void setNew(String category, String difficulty) {
+		c = category;
+		d = difficulty;
+		count = 0;
+		playing = true;
+		num = 0;
+		Load();
 	}
 	
-	public void Load() {
+	private void Load() {
+		questions.clear();
 		try {
 			File f1 = new File("Questions.txt");
 			Scanner fRead = new Scanner(f1);
 			while (fRead.hasNextLine()) {
 				String[] line = fRead.nextLine().split(",");
-				if (line[0].equals(c) && line[1].equals(d)) {
+				if (c.equals("All") && d.equals("All")) {
 					questions.add(line[2] + "," + line[3]);
+				} else if (c.equals("All")) {
+					if (line[1].equals(d)) {
+						questions.add(line[2] + "," + line[3]);
+					}
+				} else if (d.equals("All")){
+					if (line[0].equals(c)) {
+						questions.add(line[2] + "," + line[3]);
+					}
+				} else {
+					if (line[0].equals(c) && line[1].equals(d)) {
+						questions.add(line[2] + "," + line[3]);
+					}
 				}
 			}
+			num = questions.size();
 			fRead.close();
 		}
 		catch (Exception e) {
