@@ -1,5 +1,7 @@
 package game;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +16,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class GUIDriver extends Application {
@@ -22,7 +26,8 @@ public class GUIDriver extends Application {
 	private String difficulty = new String();
 
 	@Override
-	public void start(Stage Stage) throws Exception {
+	public void start(Stage Stage) {
+		try {
 		getCategory();
 		getDifficulty();
 		Stage.setScene(GameScreen());
@@ -40,6 +45,9 @@ public class GUIDriver extends Application {
 				}
 			});
 		});
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
 	}
 
@@ -54,15 +62,20 @@ public class GUIDriver extends Application {
 		TextField answerBox = new TextField();
 		Label questionBox = new Label();
 		Label score = new Label();
+		Label help = new Label("multiple answrs should be separated with commas ',' ");
 		Button check = new Button("Check");
 		Button end = new Button("End Game");
-		
-		Media test = new Media("");
-		
+		score.setTextAlignment(TextAlignment.CENTER);
+		/*
+		Media test = new Media(new File("File Goes Here").toURI().toString());
+		MediaPlayer player = new MediaPlayer(test);
+		player.play();
+		*/
 		buttons.getChildren().addAll(check, end);
 		buttons.setAlignment(Pos.CENTER);
 		answerBox.setMaxWidth(200);
-		Screen.getChildren().addAll(questionBox, answerBox, buttons, score);
+		Screen.getChildren().addAll(questionBox, answerBox, buttons, score, help);
+		help.setAlignment(Pos.BOTTOM_CENTER);
 		bp.setCenter(Screen);
 		Screen.setAlignment(Pos.CENTER);
 		
@@ -75,20 +88,18 @@ public class GUIDriver extends Application {
 		questionBox.setText(Question.split(",")[0]);
 		
 		check.setOnAction(e ->{
-			try {
-				String currentQ = new String();
-				check.setDisable(true);
-				score.setText(answer.Check(answerBox.getText()));
-				if (question.gameOn()) {
-					currentQ = question.getNext();
-					questionBox.setText(currentQ.split(",")[0]);
-					answer.SetCode(currentQ);
-					check.setDisable(false);
-				}
-				answerBox.setText("");
-			} catch (Exception v) {
-				System.out.println(v.getMessage());
+			String currentQ = new String();
+			check.setDisable(true);
+			score.setText(answer.Check(answerBox.getText()));
+			currentQ = question.getNext();
+			if (question.gameOn()) {
+				questionBox.setText(currentQ.split(",")[0]);
+				answer.SetCode(currentQ);
+				check.setDisable(false);
+			} else {
+				questionBox.setText(currentQ);
 			}
+			answerBox.setText("");
 		});
 		end.setOnAction(e -> {
 			score.setText(answer.scoreString());
@@ -97,6 +108,7 @@ public class GUIDriver extends Application {
 			restart.showAndWait().ifPresent(response -> {
 				if (response == ButtonType.OK) {
 					score.setText("");
+					answerBox.setText("");
 					getCategory();
 					getDifficulty();
 					question.setNew(category, difficulty);
@@ -104,6 +116,7 @@ public class GUIDriver extends Application {
 					currentQ = question.getNext();
 					questionBox.setText(currentQ.split(",")[0]);
 					answer.SetCode(currentQ);
+					answer.reset();
 					check.setDisable(false);
 				}
 			});
@@ -112,7 +125,7 @@ public class GUIDriver extends Application {
 	}
 	
 	private void getCategory() {
-		ChoiceDialog getCategory = new ChoiceDialog("All","test","test","test","cat4","cat5","All");
+		ChoiceDialog getCategory = new ChoiceDialog("All","Geography","Automotive","","","test","All");
 		getCategory.setTitle("Category Selection");
 		getCategory.setHeaderText("Choose Category");
 		getCategory.setOnCloseRequest(e -> {
@@ -122,7 +135,7 @@ public class GUIDriver extends Application {
 		getCategory.showAndWait();
 	}
 	private void getDifficulty() {
-		ChoiceDialog getDifficulty = new ChoiceDialog("All","easy","normal","hard","All");
+		ChoiceDialog getDifficulty = new ChoiceDialog("All","Easy","Normal","Hard","All");
 		getDifficulty.setTitle("Difficulty Selection");
 		getDifficulty.setHeaderText("Choose Difficulty");
 		getDifficulty.setOnCloseRequest(e->{

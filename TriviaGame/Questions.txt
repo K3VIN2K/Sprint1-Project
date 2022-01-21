@@ -1,2 +1,18 @@
 test,easy,Does This Work?,1
-test,easy,Count to 3,2
+1Geography,Easy,How many continents are there?,2
+1Geography,Easy,What is the capital city of Canada,3
+1Geography,Easy,What is the name of the great park in New York City,4
+Geography,Normal,Name 3 countries that start with the letter F,5
+1Geography,Normal,Name the country that starts with Y,6
+1Geography,Hard,How many countries are in South America,7
+1Geography,Hard,What is the most northern state in United States,8
+1Geography,Hard,What is the capital of Estonia,9
+Automotive,Easy,What is the best selling vehicle in the world,10
+Automotive,Easy,What was the first mass produced car?,11
+Automotive,Easy,In which country is Ferrari based?,12
+Automotive,Normal,This car manufacter makes the  Veyron &  Chirion,13
+Automotive,Normal,What is the most popular car colour,14
+Automotive,Normal,A Stingray is what type of car?,15
+Automotive,Hard,How many F150's are built every day,16
+Automotive,Hard,What is the longest running production car of all time?,17
+Automotive,Hard,Which 2 drivers are tied for the  most F1 titles,18

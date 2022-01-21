@@ -1,2 +1,18 @@
 1:yes
-2:1,2,3
+2:7
+3:Ottawa
+4:Central Park
+5:France, Fiji, Finland
+6:Yemen
+7:12
+8:Alaska
+9:Tallinn
+10:Toyota Corolla
+11:Model T
+12:Italy
+13:Bugatti
+14:White
+15:Corvette
+16:2486
+17:Chevrolet Suburban
+18:Lewis Hamilton, Michael Schmaucher
