@@ -35,6 +35,11 @@ public class Answers {
 		}
 	}
 
+	/**
+	 * checks whether the passed string matches the answer to the question
+	 * @param String answer
+	 * @return String result (formatted)
+	 */
 	public String Check(String a) {
 		try {
 			String[] answer = Load().split(",");
@@ -84,6 +89,11 @@ public class Answers {
 		}
 	}
 
+	/**
+	 * set the answer code for the question
+	 * check whether game is playing before use
+	 * @param String full question including answer code
+	 */
 	public void SetCode(String q) {
 		code = Integer.valueOf(q.split(",")[1]);
 	}
@@ -92,11 +102,20 @@ public class Answers {
 		return ((double) a / (double) b) * 100;
 	}
 
+	/**
+	 * gets the score and the percent correct
+	 * intended for after the game ends
+	 * @return formatted String containing the score
+	 */
 	public String scoreString() {
 		String score = new String("Correct Answers:  " + totalRight + "/" + totalAnswers + "\n Percent Correct:  "
 				+ getPercent(totalRight, totalAnswers) + "%");
 		return score;
 	}
+	/**
+	 * resets the answer class
+	 * use to restart the game
+	 */
 	public void reset() {
 		totalAnswers = 0;
 		totalRight = 0;

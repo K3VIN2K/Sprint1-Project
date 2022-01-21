@@ -21,7 +21,13 @@ public class Questions {
 		num = 0;
 		Load();
 	}
-	public void setNew(String category, String difficulty) {
+	/**
+	 * resets questions with a new category and difficulty
+	 * used for restarting the game
+	 * @param category
+	 * @param difficulty
+	 */
+	public void reset(String category, String difficulty) {
 		c = category;
 		d = difficulty;
 		count = 0;
@@ -60,7 +66,7 @@ public class Questions {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	private String getQuestion() {
 		Random rand = new Random();
 		int index;
@@ -68,6 +74,11 @@ public class Questions {
 		count ++;
 		return questions.get(index);
 	}
+	
+	/**
+	 * randomly selects a new question within selected category and difficulty
+	 * @return String "question, answer code"
+	 */
 	public String getNext() {
 		if (count < num) {
 			playing = true;
@@ -77,6 +88,10 @@ public class Questions {
 			return "Finished";
 		}
 	}
+	/**
+	 * returns whether the game is playing
+	 * @return boolean true when game is playing
+	 */
 	public boolean gameOn() {
 		return playing;
 	}

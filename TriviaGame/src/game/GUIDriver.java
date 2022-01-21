@@ -111,7 +111,7 @@ public class GUIDriver extends Application {
 					answerBox.setText("");
 					getCategory();
 					getDifficulty();
-					question.setNew(category, difficulty);
+					question.reset(category, difficulty);
 					String currentQ = new String();
 					currentQ = question.getNext();
 					questionBox.setText(currentQ.split(",")[0]);
