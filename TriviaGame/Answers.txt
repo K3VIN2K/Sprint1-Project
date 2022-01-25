@@ -16,3 +16,13 @@
 16:2486
 17:Chevrolet Suburban
 18:Lewis Hamilton, Michael Schmaucher
+19:Paris
+20:New York
+21:Tenerife
+22:Tijuana
+23:Sweet, Sour, Salt, Bitter
+24:7
+25:Acid
+26:Toronto
+27:Coca cola
+28:Coffee

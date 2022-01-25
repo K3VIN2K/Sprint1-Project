@@ -15,3 +15,13 @@ Automotive,Normal,A Stingray is what type of car?,15
 Automotive,Hard,How many F150's are built every day,16
 Automotive,Hard,What is the longest running production car of all time?,17
 Automotive,Hard,Which 2 drivers are tied for the  most F1 titles,18
+Geography,Normal,Where is the Austerlitz train station?,19
+History,Normal,What city became the U.S. federal capital in 1789?,20
+History,Normal,Where did two jumbo jets collide in 1977 killing 579?,21
+Geography,Easy,What foreign city is visited most by Americans?,22
+Science,Easy,What four tastes can a human distinguish?,23
+Science,Easy,How many colors are there in a rainbow?,24
+Science,Easy,What turns blue litmus paper red?,25
+Geography,Easy,What city has the tallest freestanding structure in the western hemisphere?,26
+Geography,Hard,What is the largest-selling soft drink in Morocco?,27
+Science,Easy,Whats the worlds most popular non-alcoholic organic beverage?,28
