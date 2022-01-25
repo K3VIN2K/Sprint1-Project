@@ -28,7 +28,7 @@ public class GUIDriver extends Application {
 	@Override
 	public void start(Stage Stage) {
 		try {
-		getCategory();
+		//getCategory();
 		getDifficulty();
 		Stage.setScene(GameScreen());
 		Stage.setTitle("Trivia");
@@ -79,7 +79,7 @@ public class GUIDriver extends Application {
 		bp.setCenter(Screen);
 		Screen.setAlignment(Pos.CENTER);
 		
-		Questions question = new Questions(category, difficulty);
+		Questions question = new Questions("All", difficulty);
 		Answers answer = new Answers();
 		
 		Scene scene = new Scene(bp,400,400);
@@ -109,7 +109,7 @@ public class GUIDriver extends Application {
 				if (response == ButtonType.OK) {
 					score.setText("");
 					answerBox.setText("");
-					getCategory();
+					//getCategory();
 					getDifficulty();
 					question.reset(category, difficulty);
 					String currentQ = new String();
@@ -123,9 +123,9 @@ public class GUIDriver extends Application {
 		});
 		return scene;
 	}
-	
+	/**
 	private void getCategory() {
-		ChoiceDialog getCategory = new ChoiceDialog("All","Geography","Automotive","","","test","All");
+		ChoiceDialog getCategory = new ChoiceDialog("All","Geography","Automotive","test","All");
 		getCategory.setTitle("Category Selection");
 		getCategory.setHeaderText("Choose Category");
 		getCategory.setOnCloseRequest(e -> {
@@ -134,6 +134,7 @@ public class GUIDriver extends Application {
 		});
 		getCategory.showAndWait();
 	}
+	*/
 	private void getDifficulty() {
 		ChoiceDialog getDifficulty = new ChoiceDialog("All","Easy","Normal","Hard","All");
 		getDifficulty.setTitle("Difficulty Selection");
