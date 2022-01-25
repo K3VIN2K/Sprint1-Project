@@ -30,7 +30,6 @@ public class GUIDriver extends Application {
 	@Override
 	public void start(Stage Stage) {
 		try {
-			audioDriver();
 			getCategory();
 			getDifficulty();
 			Stage.setScene(GameScreen());
@@ -52,22 +51,6 @@ public class GUIDriver extends Application {
 			System.out.println(e.getMessage());
 		}
 		
-	}
-	
-	public void audioDriver(){
-		try {
-		URL station = new URL("https://stream.simulatorradio.com/stream.mp3");
-		station.openConnection().connect();
-		Media test = new Media(station.toString());
-		MediaPlayer player = new MediaPlayer(test);
-		player.setAutoPlay(true);
-		//player.setOnStalled(station.openConnection().connect());
-	//	while (Playing == false){
-		//	station.openConnection().connect();
-		//}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
 	}
 
 	public static void main(String[] args){
