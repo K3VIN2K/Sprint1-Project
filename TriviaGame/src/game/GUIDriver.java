@@ -1,6 +1,6 @@
 package game;
 
-import java.io.File;
+import java.io.BufferedInputStream;
 import java.net.URL;
 
 import javafx.application.Application;
@@ -16,16 +16,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+import javazoom.jl.player.Player;
 
 public class GUIDriver extends Application {
 	
 	private String category = new String();
 	private String difficulty = new String();
+	MusicDriver music = new MusicDriver();
 
 	@Override
 	public void start(Stage Stage) {
@@ -36,11 +35,13 @@ public class GUIDriver extends Application {
 			Stage.setTitle("Trivia");
 			Stage.show();
 			
+			
 			Stage.setOnCloseRequest(e -> {
 				Alert confirmClose = new Alert(AlertType.CONFIRMATION);
 				confirmClose.setHeaderText("Close?");
 				confirmClose.showAndWait().ifPresent(response -> {
 					if (response == ButtonType.OK) {
+						music.stop();
 						Stage.close();
 					} else {
 						e.consume();
@@ -48,11 +49,11 @@ public class GUIDriver extends Application {
 				});
 			});
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		
 	}
-
+	
 	public static void main(String[] args){
 		launch(args);
 	}
@@ -67,9 +68,10 @@ public class GUIDriver extends Application {
 			Label help = new Label("multiple answrs should be separated with commas ',' ");
 			Button check = new Button("Check");
 			Button end = new Button("End Game");
+			Button playMusic = new Button("Play Music");
 			score.setTextAlignment(TextAlignment.CENTER);
 			
-			buttons.getChildren().addAll(check, end);
+			buttons.getChildren().addAll(playMusic, check, end);
 			buttons.setAlignment(Pos.CENTER);
 			answerBox.setMaxWidth(200);
 			Screen.getChildren().addAll(questionBox, answerBox, buttons, score, help);
@@ -99,6 +101,19 @@ public class GUIDriver extends Application {
 					questionBox.setText(currentQ);
 				}
 				answerBox.setText("");
+			});
+			playMusic.setOnAction(e -> {
+				try {
+				music.start();
+				Alert info = new Alert(AlertType.INFORMATION);
+				info.setContentText("visit at simulatorradio.com");
+				info.setHeaderText("Now Playing Simulator Radio");
+				info.setTitle("Playing Music");
+				info.show();
+				} catch (Exception v) {
+					System.err.println(v.getMessage());
+					System.out.println("Ignore Me!");
+				}
 			});
 			end.setOnAction(e -> {
 				score.setText(answer.scoreString());
