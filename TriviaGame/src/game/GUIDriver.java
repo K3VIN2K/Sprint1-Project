@@ -77,7 +77,7 @@ public class GUIDriver extends Application {
 			bp.setCenter(Screen);
 			Screen.setAlignment(Pos.CENTER);
 			
-			Questions question = new Questions("All", difficulty);
+			Questions question = new Questions(category, difficulty);
 			Answers answer = new Answers();
 			
 			Scene scene = new Scene(bp,400,400);
