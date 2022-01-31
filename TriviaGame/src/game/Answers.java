@@ -37,6 +37,7 @@ public class Answers {
 
 	/**
 	 * checks whether the passed string matches the answer to the question
+	 * 
 	 * @param String answer
 	 * @return String result (formatted)
 	 */
@@ -74,11 +75,11 @@ public class Answers {
 				}
 			}
 			totalRight += numRight;
-			String info = new String("You Missed:  " + Stringanswers.toString().replace("[", "").replace("]", "") + "\n" +
-					"Incorrect Answers:  " + wrongAnswers.toString().replace("[", "").replace("]", ""));
+			String info = new String("You Missed:  " + Stringanswers.toString().replace("[", "").replace("]", "") + "\n"
+					+ "Incorrect Answers:  " + wrongAnswers.toString().replace("[", "").replace("]", ""));
 			if (getPercent(numRight, numA) == 100) {
 				return "Correct: \n" + getPercent(numRight, numA) + "%";
-			} else if (getPercent(numRight, numA) >= 50){
+			} else if (getPercent(numRight, numA) >= 50) {
 				return "Correct: \n" + getPercent(numRight, numA) + "% \n" + info;
 			} else {
 				return "Incorrect \n" + getPercent(numRight, numA) + "% \n" + info;
@@ -90,8 +91,8 @@ public class Answers {
 	}
 
 	/**
-	 * set the answer code for the question
-	 * check whether game is playing before use
+	 * set the answer code for the question check whether game is playing before use
+	 * 
 	 * @param String full question including answer code
 	 */
 	public void SetCode(String q) {
@@ -103,8 +104,8 @@ public class Answers {
 	}
 
 	/**
-	 * gets the score and the percent correct
-	 * intended for after the game ends
+	 * gets the score and the percent correct intended for after the game ends
+	 * 
 	 * @return formatted String containing the score
 	 */
 	public String scoreString() {
@@ -112,9 +113,9 @@ public class Answers {
 				+ getPercent(totalRight, totalAnswers) + "%");
 		return score;
 	}
+
 	/**
-	 * resets the answer class
-	 * use to restart the game
+	 * resets the answer class use to restart the game
 	 */
 	public void reset() {
 		totalAnswers = 0;

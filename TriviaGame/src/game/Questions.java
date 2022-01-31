@@ -13,7 +13,8 @@ public class Questions {
 	private int count;
 	private ArrayList<String> questions = new ArrayList<>();
 	private boolean playing;
-	Questions(String category, String difficulty){
+
+	Questions(String category, String difficulty) {
 		c = category;
 		d = difficulty;
 		count = 0;
@@ -21,9 +22,11 @@ public class Questions {
 		num = 0;
 		Load();
 	}
+
 	/**
-	 * resets questions with a new category and difficulty
-	 * used for restarting the game
+	 * resets questions with a new category and difficulty used for restarting the
+	 * game
+	 * 
 	 * @param category
 	 * @param difficulty
 	 */
@@ -35,7 +38,7 @@ public class Questions {
 		num = 0;
 		Load();
 	}
-	
+
 	private void Load() {
 		questions.clear();
 		try {
@@ -49,7 +52,7 @@ public class Questions {
 					if (line[1].equals(d)) {
 						questions.add(line[2] + "," + line[3]);
 					}
-				} else if (d.equals("All")){
+				} else if (d.equals("All")) {
 					if (line[0].equals(c)) {
 						questions.add(line[2] + "," + line[3]);
 					}
@@ -61,8 +64,7 @@ public class Questions {
 			}
 			num = questions.size();
 			fRead.close();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -73,12 +75,13 @@ public class Questions {
 		index = rand.nextInt(questions.size());
 		String question = questions.get(index);
 		questions.remove(index);
-		count ++;
+		count++;
 		return question;
 	}
-	
+
 	/**
 	 * randomly selects a new question within selected category and difficulty
+	 * 
 	 * @return String "question, answer code"
 	 */
 	public String getNext() {
@@ -90,8 +93,10 @@ public class Questions {
 			return "Finished";
 		}
 	}
+
 	/**
 	 * returns whether the game is playing
+	 * 
 	 * @return boolean true when game is playing
 	 */
 	public boolean gameOn() {
