@@ -71,8 +71,10 @@ public class Questions {
 		Random rand = new Random();
 		int index;
 		index = rand.nextInt(questions.size());
+		String question = questions.get(index);
+		questions.remove(index);
 		count ++;
-		return questions.get(index);
+		return question;
 	}
 	
 	/**
